@@ -13,15 +13,15 @@ class LocationTableSeeder extends Seeder
     public function run()
     {
         $data = [
-
             'Department IT',
             'Terminal Guard 1',
             'Kantin A'
         ];
 
         foreach($data as $location){
-            //part best dia ini
-            Location::create(['location'=>$location]);
+            Location::create([
+                'location'=>$location
+            ]);
         }
     }
 }

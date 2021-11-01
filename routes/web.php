@@ -18,3 +18,7 @@ Route::get('/','HomeController@index');
 
 //hanya untuk role_id 2 saja dibenarkan
 Route::middleware(OnlyGroupUserAllowedMiddleware::class)->get('/users','UsersController@index');
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
+Route::put('/assets/{id}','HomeController@update')->name('asset.update');

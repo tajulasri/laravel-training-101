@@ -20,9 +20,5 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 
 
-Route::get('/assets',function(Request $request){
-
-    return Location::all();
-    //$locations = Location::get();
-    //return response()->json($locations);
-});
+//route for api/assets
+Route::get('/assets','AssetApiController@index');

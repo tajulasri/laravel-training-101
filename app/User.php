@@ -36,4 +36,15 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+
+    //this is the to define one to many relationship
+    //between table users to table assets
+    //since each users has own many assets
+    public function assignedAssets()
+    {
+        //current_own_by is FK on table assets
+        //id is referring to table users primary key
+        return $this->hasMany(Asset::class,'current_owned_by','id');
+    }
 }
