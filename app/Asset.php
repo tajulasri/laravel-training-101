@@ -27,10 +27,13 @@ class Asset extends Model
         ->lt(now());
     }
 
-
-
      public function getAvailabilityAttribute()
     {
         return $this->current_owned_by == null? 'Available' : 'Not available';
+    }
+
+    public function ownedBy()
+    {
+        return $this->belongsTo(User::class,'current_owned_by','id');
     }
 }

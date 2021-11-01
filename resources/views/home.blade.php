@@ -13,13 +13,14 @@
                     @endif
                     
                     <table class="table table-bordered table-hover">
-                        <tr class="text-center">
+                        <tr class="text-center" style="background-color: #eee;">
                             <th>ID</th>
                             <th>Label</th>
                             <th>Expiry Date</th>
                             <th>Expiry in</th>
                             <th>Is Expired</th>
                             <th>Availability</th>
+                            <th>Owned By</th>
                             <th>Action</th>
                         </tr >
                         @foreach($assets as $asset)
@@ -30,7 +31,8 @@
                             <td>{{ $asset->expired_date}} </td>
                             <td>{{ $asset->expiry_in_days }} days</td>
                             <td><span class="badge badge-{{ $asset->is_expired ? 'danger' : 'success'}}">{{ $asset->is_expired ? 'Expired': 'Valid' }}</span></td>
-                            <td class="">{{ $asset->availability}} </td>
+                            <td class="" style="{{ $asset->current_owned_by != null ? 'text-decoration: line-through': '' }}">{{ __('Available') }}</td>
+                            <td>{{ $asset->ownedBy->name ?? '-' }}</td>
                             <td>
                                 <div class="dropdown">
                                     <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
