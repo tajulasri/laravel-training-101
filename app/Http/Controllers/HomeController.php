@@ -41,7 +41,7 @@ class HomeController extends Controller
        $asset->current_owned_by = $request->current_owned_by;
        $asset->save();
 
-       return redirect()->back();
+       return redirect()->back()->with('success',sprintf('assigned %s asset to user.',$asset->asset_serial));
     }
 
     public function delete($id)
