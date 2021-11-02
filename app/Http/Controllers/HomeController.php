@@ -35,17 +35,5 @@ class HomeController extends Controller
         return view('home',['assets' => $assets,'users' =>$users]);
     }
 
-    public function update($id,Request $request)
-    {
-       $asset = Asset::find($id);
-       $asset->current_owned_by = $request->current_owned_by;
-       $asset->save();
 
-       return redirect()->back()->with('success',sprintf('assigned %s asset to user.',$asset->asset_serial));
-    }
-
-    public function delete($id)
-    {
-
-    }
 }

@@ -21,4 +21,8 @@ Route::middleware(OnlyGroupUserAllowedMiddleware::class)->get('/users','UsersCon
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
-Route::put('/assets/{id}','HomeController@update')->name('asset.update');
+
+Route::resource('assets',AssetController::class);
+//route grouping
+
+

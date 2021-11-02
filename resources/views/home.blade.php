@@ -12,6 +12,11 @@
                     </div>
                     @endif
                     
+
+                  @if($errors->any())
+                   <p class="alert alert-danger">{{ $errors->first('current_owned_by') }}</p>
+                  @endif
+
                     <table class="table table-bordered table-hover">
                         <tr class="text-center" style="background-color: #eee;">
                             <th>ID</th>
@@ -56,7 +61,7 @@
                                         <span aria-hidden="true">&times;</span>
                                         </button>
                                     </div>
-                                        <form action="{{ route('asset.update',$asset->id) }}" method="post">
+                                        <form action="{{ route('assets.update',$asset->id) }}" method="post">
                                     <div class="modal-body">
                                             
                                             @csrf
@@ -65,7 +70,7 @@
                                             <div class="form-group">
                                                 <p>List of users</p>
                                                 <select name="current_owned_by" class="form-control">
-                                                    <option value="null">Select user</option>
+                                                    <option value="">Select user</option>
                                                     @foreach($users as $user)
                                                         <option value="{{ $user->id }}">{{ $user->name }} | {{ $user->assignedAssets()->count() }}</option>
                                                     @endforeach

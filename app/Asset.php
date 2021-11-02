@@ -13,7 +13,7 @@ class Asset extends Model
     ];
 
 
-      public function getExpiryInDaysAttribute()
+    public function getExpiryInDaysAttribute()
     {
         return now()
         ->parse($this->expired_date)
