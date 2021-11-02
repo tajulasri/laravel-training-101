@@ -50,7 +50,14 @@
                                     <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                                         <a class="dropdown-item" href="{{ route('assets.edit',$asset->id) }}">Edit</a>
                                         <a class="dropdown-item" href="#" data-target="#assignModal-{{ $asset->id }}" data-toggle="modal">Assign</a>
-                                        <a class="dropdown-item" href="#">Delete</a>
+                                        <a class="dropdown-item" href="#">
+                                            <form action="{{ route('assets.destroy',$asset->id) }}" method="post">
+                                                @csrf
+                                                {{ method_field('DELETE')}}
+
+                                                <input type="submit" value="Delete"/>
+                                            </form>
+                                        </a>
                                     </div>
                                 </div>
                             </td>

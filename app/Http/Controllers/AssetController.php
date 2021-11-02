@@ -146,6 +146,9 @@ class AssetController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $asset = Asset::find($id);
+        $asset->delete();
+
+        return redirect()->back()->with('success','Record deleted.');
     }
 }

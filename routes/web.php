@@ -22,7 +22,7 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
-Route::resource('assets',AssetController::class);
+Route::resource('assets',AssetController::class)->middleware('auth');
 //route grouping
 
 
