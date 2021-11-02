@@ -12,6 +12,7 @@ class Asset extends Model
         'availability'
     ];
 
+    protected $guarded = ['id'];
 
     public function getExpiryInDaysAttribute()
     {

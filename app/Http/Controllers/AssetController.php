@@ -47,7 +47,9 @@ class AssetController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $asset = Asset::create($request->all());
+
+        return redirect()->back()->with('success','Saving record succesfully');
     }
 
     /**
