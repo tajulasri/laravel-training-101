@@ -26,6 +26,7 @@
                             <th>Is Expired</th>
                             <th>Availability</th>
                             <th>Owned By</th>
+                            <th>Code</th>
                             <th>Action</th>
                         </tr >
                         @foreach($assets as $asset)
@@ -39,12 +40,15 @@
                             <td class="" style="{{ $asset->current_owned_by != null ? 'text-decoration: line-through': '' }}">{{ __('Available') }}</td>
                             <td>{{ $asset->ownedBy->name ?? '-' }}</td>
                             <td>
+                               <img src="data:image/png;base64,{{ \DNS2D::getBarcodePNG($asset->asset_serial ?? '-' , 'QRCODE')}} " alt="barcode"   />
+                            </td>
+                            <td>
                                 <div class="dropdown">
                                     <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                     Action
                                     </button>
                                     <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                        <a class="dropdown-item" href="#">Edit</a>
+                                        <a class="dropdown-item" href="{{ route('assets.edit',$asset->id) }}">Edit</a>
                                         <a class="dropdown-item" href="#" data-target="#assignModal-{{ $asset->id }}" data-toggle="modal">Assign</a>
                                         <a class="dropdown-item" href="#">Delete</a>
                                     </div>
@@ -61,27 +65,12 @@
                                         <span aria-hidden="true">&times;</span>
                                         </button>
                                     </div>
-                                        <form action="{{ route('assets.update',$asset->id) }}" method="post">
-                                    <div class="modal-body">
-                                            
-                                            @csrf
-                                            {{ method_field('PUT') }}
 
-                                            <div class="form-group">
-                                                <p>List of users</p>
-                                                <select name="current_owned_by" class="form-control">
-                                                    <option value="">Select user</option>
-                                                    @foreach($users as $user)
-                                                        <option value="{{ $user->id }}">{{ $user->name }} | {{ $user->assignedAssets()->count() }}</option>
-                                                    @endforeach
-                                                </select>
-                                            </div>
-                                    </div>
-                                    <div class="modal-footer">
-                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                        <button type="submit" class="btn btn-primary">Save changes</button>
-                                    </div>
-                                        </form>
+                                     <div class="row justify-content-center" style="padding-top:3em;">
+                                         <img height="150" width="150" src="data:image/png;base64,{{ \DNS2D::getBarcodePNG($asset->asset_serial ?? '-' , 'QRCODE')}} " alt="barcode"   />
+                                     </div>
+
+                                       
                                 </div>
                             </div>
                         </div>

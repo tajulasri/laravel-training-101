@@ -36,7 +36,7 @@
                                     Assets 
                                 </a>
                                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                    <a class="dropdown-item" href="">Assets List</a>
+                                    <a class="dropdown-item" href="/home">Assets List</a>
                                     <a class="dropdown-item" href="{{ route('assets.create') }}">Create Asset</a>
                                   
                                 </div>

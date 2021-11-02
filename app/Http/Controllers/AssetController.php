@@ -8,6 +8,7 @@ use App\AssetType;
 use App\Location;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
+use Ramsey\Uuid\Uuid;
 
 class AssetController extends Controller
 {
@@ -47,7 +48,23 @@ class AssetController extends Controller
      */
     public function store(Request $request)
     {
+    
+        $validator = Validator::make($request->all(),[
+            'label' =>'required',
+            'expired_date'=>'required',
+            'register_date'=>'required'
+        ]);
+
+        if($validator->fails()){
+            return redirect()->back()->withErrors($validator->messages());
+        }
+
+        $uuid = Uuid::uuid4();
+        $request->merge(['asset_serial'=> strtoupper($uuid->toString())]);
         $asset = Asset::create($request->all());
+        
+        //composer require ramsey/uuid
+        //composer require milon/barcode
 
         return redirect()->back()->with('success','Saving record succesfully');
     }
@@ -71,7 +88,18 @@ class AssetController extends Controller
      */
     public function edit($id)
     {
-        //
+         $types = AssetType::get();
+        $assetStatus = AssetStatus::get();
+        $assetlocations = Location::get();
+
+        $asset = Asset::find($id);
+
+        return view('assets.edit',[
+            'types' =>$types,
+            'asset'=>$asset,
+            'assetStatus'=>$assetStatus,
+            'assetlocations'=>$assetlocations
+        ]);
     }
 
     /**
@@ -86,7 +114,7 @@ class AssetController extends Controller
         //validation here
         $validation = Validator::make($request->all(),[
             //form attribute => 'rules'
-            'current_owned_by' => 'required'
+            //'current_owned_by' => 'required'
         ]);
 
 
@@ -97,11 +125,17 @@ class AssetController extends Controller
 
 
         $asset = Asset::find($id);
-        $asset->current_owned_by = $request->current_owned_by;
+        $asset->asset_type_id = $request->asset_type_id;
+        $asset->asset_status_id = $request->asset_status_id;
+        $asset->location_id = $request->location_id;
+        $asset->label = $request->label;
+        $asset->expired_date = $request->expired_date;
+        $asset->register_date = $request->register_date;
+        //$asset->current_owned_by = $request->current_owned_by;
         $asset->save();
 
         return redirect()->back()
-       ->with('success',sprintf('assigned %s asset to user.',$asset->asset_serial));
+       ->with('success',sprintf('Save asset is success %s.',$asset->asset_serial));
     }
 
     /**

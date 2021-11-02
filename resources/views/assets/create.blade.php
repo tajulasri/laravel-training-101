@@ -8,6 +8,15 @@
 				<div class="card-header"></div>
 				<div class="card-content" style="margin-top: 20px;">
 					<div class="col-md-8">
+
+					  @if($errors->any())
+                   		
+                   		@foreach($errors->all() as $error)
+                   			<p class="alert alert-danger">{{ $error }}</p>
+                   		@endforeach
+                  @endif
+
+
 						<form action="{{ route('assets.store') }}" method="post">
 							@csrf
 
@@ -50,12 +59,12 @@
 
 							<div class="form-group">
 								<label>Register Date</label>
-								<input type="date" name="label" class="form-control" placeholder="Register Date">
+								<input type="date" name="register_date" class="form-control" placeholder="Register Date">
 							</div>
 
 							<div class="form-group">
 								<label>Expiry Date</label>
-								<input type="date" name="label" class="form-control" placeholder="Expiry Date">
+								<input type="date" name="expired_date" class="form-control" placeholder="Expiry Date">
 							</div>
 
 							<div class="form-group">
