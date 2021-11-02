@@ -15,6 +15,9 @@
 								<label>Location</label>
 								<select name="location_id" class="form-control">
 									<option>Select location </option>
+									@foreach($assetlocations as $location)
+										<option value="{{ $location->id }}">{{ $location->location }}</option>
+									@endforeach
 								</select>
 							</div>
 
@@ -22,6 +25,9 @@
 								<label>Asset Status</label>
 										<select name="asset_status_id" class="form-control">
 									<option>Select Asset Status </option>
+									@foreach($assetStatus as $status)
+										<option value="{{ $status->id }}">{{ $status->name }}</option>
+									@endforeach
 								</select>
 							</div>
 
@@ -29,6 +35,9 @@
 								<label>Asset Type</label>
 										<select name="asset_type_id" class="form-control">
 									<option>Select Asset Type </option>
+										@foreach($types as $type)
+										<option value="{{ $type->id }}">{{ $type->type }}</option>
+									@endforeach
 								</select>
 							</div>
 

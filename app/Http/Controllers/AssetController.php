@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Asset;
+use App\AssetStatus;
+use App\AssetType;
+use App\Location;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
@@ -25,7 +28,15 @@ class AssetController extends Controller
      */
     public function create()
     {
-        return view('assets.create');
+        $types = AssetType::get();
+        $assetStatus = AssetStatus::get();
+        $assetlocations = Location::get();
+
+        return view('assets.create',[
+            'types' =>$types,
+            'assetStatus'=>$assetStatus,
+            'assetlocations'=>$assetlocations
+        ]);
     }
 
     /**
