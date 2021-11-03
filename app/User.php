@@ -37,7 +37,12 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-
+    public function getPermissions() {
+        return [
+            'view-upload-file',
+            'store-upload-file',
+        ];
+    }
     //this is the to define one to many relationship
     //between table users to table assets
     //since each users has own many assets

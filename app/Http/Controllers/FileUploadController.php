@@ -6,16 +6,26 @@ use App\Mail\HelloEmail;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Gate;
 
 class FileUploadController extends Controller
 {
     public function index()
     {
+
+        if(!Gate::allows('view-upload-file',auth()->user())) {
+           return redirect()->back()->with('error','Unauthorized.');
+        }
+
         return view('file_uploads.file_upload');
     }
 
     public function store(Request $request)
     {
+        if(!Gate::allows('store-upload-file',auth()->user())) {
+           return redirect()->back()->with('error','Unauthorized.');
+        }
+
         $validator = Validator::make($request->all(),[
             'file' => 'required|mimes:jpg,bmp,png'
         ]);

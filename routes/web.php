@@ -26,7 +26,7 @@ Route::get('/home', 'HomeController@index')->name('home');
 Route::resource('assets',AssetController::class)->middleware('auth');
 
 //route grouping
-Route::group(['prefix' => 'uploads'],function(){
+Route::group(['prefix' => 'uploads','middleware' =>'auth'],function(){
     Route::get('/',[FileUploadController::class,'index'])->name('files.upload');
 	Route::post('/',[FileUploadController::class,'store'])->name('files.upload.store');
 });

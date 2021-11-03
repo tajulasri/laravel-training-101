@@ -79,6 +79,10 @@
                 </div>
             </nav>
             <main class="py-4">
+
+                @if(session('error'))
+                    <p class="alert alert-danger">{{ session('error') }}</p>
+                @endif
                 @yield('content')
             </main>
         </div>
