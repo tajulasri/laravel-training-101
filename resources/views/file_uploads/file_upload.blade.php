@@ -3,6 +3,12 @@
 <div class="container">
 	<div class="row justify-content-center">
 		<div class="card col-md-10">
+			 @if (session('success'))
+                    <div class="alert alert-success" role="alert">
+                        {{ session('success') }}
+                    </div>
+                    @endif
+                    
 			<div class="card-header"></div>
 			<div class="card-content" style="margin-top: 2em;">
 				{{-- our content is begin here --}}
