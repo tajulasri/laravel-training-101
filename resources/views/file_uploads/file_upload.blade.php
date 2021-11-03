@@ -8,9 +8,11 @@
                         {{ session('success') }}
                     </div>
                     @endif
-                    
+
 			<div class="card-header"></div>
 			<div class="card-content" style="margin-top: 2em;">
+				<img src="{{ asset('storage/images/unnamed.jpg') }}" width="200" height="auto">
+				<br />
 				{{-- our content is begin here --}}
 				<form action="{{ route('files.upload.store') }}" method="post" enctype="multipart/form-data">
 					@csrf
