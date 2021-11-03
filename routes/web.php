@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\FileUploadController;
 use App\Http\Middleware\OnlyGroupUserAllowedMiddleware;
 use Illuminate\Support\Facades\Route;
 
@@ -23,6 +24,10 @@ Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 
 Route::resource('assets',AssetController::class)->middleware('auth');
-//route grouping
 
+//route grouping
+Route::group(['prefix' => 'uploads'],function(){
+    Route::get('/',[FileUploadController::class,'index'])->name('files.upload');
+	Route::post('/',[FileUploadController::class,'store'])->name('files.upload.store');
+});
 

@@ -31,16 +31,19 @@
                     <div class="collapse navbar-collapse" id="navbarSupportedContent">
                         <!-- Left Side Of Navbar -->
                         <ul class="navbar-nav mr-auto">
-                            <li class="nav-item dropdown">
+                          @if(auth()->check())
+                              <li class="nav-item dropdown">
                                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                     Assets 
                                 </a>
                                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                                     <a class="dropdown-item" href="/home">Assets List</a>
                                     <a class="dropdown-item" href="{{ route('assets.create') }}">Create Asset</a>
+                                     <a class="dropdown-item" href="{{ route('files.upload') }}">File uploads</a>
                                   
                                 </div>
                             </li>
+                          @endif
                         </ul>
                         <!-- Right Side Of Navbar -->
                         <ul class="navbar-nav ml-auto">

@@ -49,7 +49,7 @@
                                     </button>
                                     <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                                         <a class="dropdown-item" href="{{ route('assets.edit',$asset->id) }}">Edit</a>
-                                        <a class="dropdown-item" href="#" data-target="#assignModal-{{ $asset->id }}" data-toggle="modal">Assign</a>
+                                        <a class="dropdown-item" href="#" data-target="#assignModal-{{ $asset->id }}" data-toggle="modal">View Code</a>
                                         <a class="dropdown-item" href="#">
                                             <form action="{{ route('assets.destroy',$asset->id) }}" method="post">
                                                 @csrf
@@ -67,13 +67,13 @@
                             <div class="modal-dialog" role="document">
                                 <div class="modal-content">
                                     <div class="modal-header">
-                                        <h5 class="modal-title" id="exampleModalLabel">Assign Current Asset To User</h5>
+                                        <h5 class="modal-title" id="exampleModalLabel">QR CODE</h5>
                                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                         <span aria-hidden="true">&times;</span>
                                         </button>
                                     </div>
 
-                                     <div class="row justify-content-center" style="padding-top:3em;">
+                                     <div class="row justify-content-center" style="padding-top:3em; padding-bottom: 3em;">
                                          <img height="150" width="150" src="data:image/png;base64,{{ \DNS2D::getBarcodePNG($asset->asset_serial ?? '-' , 'QRCODE')}} " alt="barcode"   />
                                      </div>
 

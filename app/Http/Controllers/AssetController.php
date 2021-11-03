@@ -8,7 +8,9 @@ use App\AssetType;
 use App\Location;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Log;
 use Ramsey\Uuid\Uuid;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 
 class AssetController extends Controller
 {
@@ -146,9 +148,21 @@ class AssetController extends Controller
      */
     public function destroy($id)
     {
-        $asset = Asset::find($id);
+       try {
+         $asset = Asset::findOrFail($id);
         $asset->delete();
+         Log::error($id.' <= id asset deleted.');
+          return redirect()
+        ->back()
+        ->with('success','Record deleted.');
+       }
+       catch(ModelNotFoundException $e){
+        Log::error($id.' <= id asset not found.');
+         return redirect()
+        ->back()
+        ->with('error','Record not found.');
+       }
 
-        return redirect()->back()->with('success','Record deleted.');
+      
     }
 }
