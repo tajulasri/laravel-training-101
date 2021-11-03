@@ -11,8 +11,7 @@ use Illuminate\Support\Facades\Gate;
 class FileUploadController extends Controller
 {
     public function index()
-    {
-
+    {        
         if(!Gate::allows('view-upload-file',auth()->user())) {
            return redirect()->back()->with('error','Unauthorized.');
         }

@@ -18,6 +18,11 @@ class AuthServiceProvider extends ServiceProvider
         // 'App\Model' => 'App\Policies\ModelPolicy',
     ];
 
+    protected $permissions = [
+        'view-upload-file',
+        'store-upload-file',
+        'delete-asset'
+    ];
 
     /**
      * Register any authentication / authorization services.
@@ -30,5 +35,10 @@ class AuthServiceProvider extends ServiceProvider
         //define our permissions
         Gate::define('view-upload-file',[FileUploadPolicy::class,'index']);
         Gate::define('store-upload-file',[FileUploadPolicy::class,'store']);
+        
+        //disallow user from deleting asset record
+        Gate::define('delete-asset',function(User $user){
+            return in_array('delete-asset',$user->getPermissions());
+        });
     }
 }

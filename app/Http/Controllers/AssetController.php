@@ -8,6 +8,7 @@ use App\AssetType;
 use App\Location;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Log;
 use Ramsey\Uuid\Uuid;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
@@ -148,6 +149,14 @@ class AssetController extends Controller
      */
     public function destroy($id)
     {
+
+        if(!Gate::allows('delete-asset',auth()->user())){
+            
+            return redirect()
+            ->back()
+            ->with('error','You are not allowed to complete this action.');
+        }
+
        try {
          $asset = Asset::findOrFail($id);
         $asset->delete();
