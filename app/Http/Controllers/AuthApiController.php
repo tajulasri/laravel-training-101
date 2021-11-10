@@ -13,8 +13,8 @@ class AuthApiController extends Controller
     public function login(Request $request)
     {
         $validator = Validator::make($request->all(), [
-            'usernaname' => 'required',
-            'password'   => 'required|string|min:4',
+            'email'    => 'required',
+            'password' => 'required|string|min:4',
         ]);
 
         if ($validator->fails()) {
