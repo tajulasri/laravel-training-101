@@ -16,7 +16,8 @@
         "laravel/tinker": "^2.0",
         "laravel/ui": "2.x",
         "milon/barcode": "^7.0",
-        "ramsey/uuid": "^4.2"
+        "ramsey/uuid": "^4.2",
+        "tymon/jwt-auth": "^1.0"
     },
     "require-dev": {
         "facade/ignition": "^2.0",

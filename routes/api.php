@@ -19,6 +19,10 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
+Route::post('login', 'AuthApiController@login');
+Route::post('me', 'AuthApiController@profile');
+Route::post('logout', 'AuthApiController@logout');
+
 //route for api/assets
 Route::get('/assets', 'AssetApiController@index');
 Route::get('/assets/{id}', 'AssetApiController@show');
