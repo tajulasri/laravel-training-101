@@ -21,4 +21,5 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 
 //route for api/assets
 Route::get('/assets', 'AssetApiController@index');
+Route::get('/assets/{id}', 'AssetApiController@show');
 Route::get('/asset-checker/{serial}', 'AssetCheckerApiController@show');

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Asset;
 use Illuminate\Http\Request;
+use Symfony\Component\HttpFoundation\Response;
 
 class AssetApiController extends Controller
 {
@@ -15,9 +16,8 @@ class AssetApiController extends Controller
     public function index(Request $request)
     {
         $assets = Asset::query()
-        ->where('label','like','%'.$request->search.'%')
-        ->orderBy('id','desc')
-        ->get();
+            ->orderBy('id', 'desc')
+            ->get();
 
         return response()->json($assets);
     }
@@ -25,7 +25,7 @@ class AssetApiController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \Illuminate\Http\Request    $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
@@ -36,19 +36,28 @@ class AssetApiController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  int                         $id
      * @return \Illuminate\Http\Response
      */
     public function show($id)
     {
-        //
+        try {
+            $asset = Asset::where('id', $id)
+                ->firstOrFail();
+
+            return response()->json(['status' => Response::HTTP_OK, 'data' => $asset]);
+
+        } catch (Exception $e) {
+
+            return response()->json(['status' => Response::BAD_REQUEST, 'data' => 'Resource not found']);
+        }
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  \Illuminate\Http\Request    $request
+     * @param  int                         $id
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
@@ -59,7 +68,7 @@ class AssetApiController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  int                         $id
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
