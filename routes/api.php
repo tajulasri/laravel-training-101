@@ -20,7 +20,7 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 
 Route::post('login', 'AuthApiController@login');
-Route::post('me', 'AuthApiController@profile');
+Route::post('me', 'AuthApiController@profile')->middleware('jwt:auth');
 Route::post('logout', 'AuthApiController@logout');
 
 //route for api/assets
