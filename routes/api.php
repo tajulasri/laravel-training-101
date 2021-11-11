@@ -3,8 +3,7 @@
 use App\Location;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-
-Tymon\JWTAuth\Http\Middleware\JwAuthenticate;
+use Tymon\JWTAuth\Http\Middleware\Authenticate;
 
 /*
 |--------------------------------------------------------------------------
@@ -22,7 +21,7 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 
 Route::post('login', 'AuthApiController@login');
-Route::post('me', 'AuthApiController@profile')->middleware(Authenticate::class);
+Route::post('me', 'AuthApiController@userProfile')->middleware(Authenticate::class);
 Route::post('logout', 'AuthApiController@logout');
 
 //route for api/assets
